@@ -1,0 +1,32 @@
+# Audit output directories
+audit/
+**/audit/
+
+# SSH configuration files with sensitive data
+ssh-routes.conf
+**/ssh-routes.conf
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+.DS_Store
+
+# SSH keys (if accidentally placed in repo)
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+id_ecdsa*
+
+# Log files
+*.log
+
+# OS generated files
+Thumbs.db
+.directory
