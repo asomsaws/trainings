@@ -1,0 +1,77 @@
+# SSH Routes Configuration
+# Format: NETWORK/CIDR via JUMP_CHAIN
+# Jump chains are comma-separated: user@host1,user@host2,user@host3
+
+# ==========================================
+# Cyber Polygon Network Topology
+# ==========================================
+
+# Primary Kali jump host
+# All networks go through kali first
+# kali.cyberpolygon.com -> 203.0.113.10
+
+# ==========================================
+# Internal Networks (through specific VMs)
+# ==========================================
+
+# Network 1: 192.168.1.0/24
+# Accessible via: Kali -> VM1 (192.168.1.10)
+# VM1 has secondary adapter on this network
+192.168.1.0/24 via root@kali,admin@192.168.1.10
+
+# Network 2: 192.168.2.0/24
+# Accessible via: Kali -> VM2 (192.168.2.10)
+# VM2 has secondary adapter on this network
+192.168.2.0/24 via root@kali,admin@192.168.2.10
+
+# Network 3: 10.0.5.0/24
+# Accessible via: Kali -> VM3 (10.0.5.1)
+# VM3 has secondary adapter on this network
+10.0.5.0/24 via root@kali,user@10.0.5.1
+
+# Network 4: 172.16.0.0/16
+# Large network accessible via: Kali -> VM4 -> Internal Gateway
+# Multi-hop for deep network access
+172.16.0.0/16 via root@kali,admin@172.16.1.1,root@172.16.1.254
+
+# ==========================================
+# DMZ Networks
+# ==========================================
+
+# DMZ Network: 10.10.0.0/16
+# Accessible via: Kali -> DMZ Gateway
+10.10.0.0/16 via root@kali,admin@10.10.0.1
+
+# ==========================================
+# Management Networks
+# ==========================================
+
+# Management Network: 192.168.100.0/24
+# Direct access through Kali only
+192.168.100.0/24 via root@kali
+
+# ==========================================
+# Default Route
+# ==========================================
+
+# For any network not explicitly defined above
+# Try through primary Kali jump host
+default via root@kali
+
+# ==========================================
+# Direct Access (no jump host)
+# ==========================================
+
+# If you have direct access to certain networks
+# from your workstation (uncomment and configure)
+# 192.168.50.0/24 via direct
+
+# ==========================================
+# Notes
+# ==========================================
+# - Replace hostnames/IPs with your actual infrastructure
+# - Replace usernames (root, admin, user) with actual users
+# - More specific routes are matched first
+# - Default route is used if no match found
+# - Use "direct" for networks accessible without jump host
+# - Test routes with: ./ssh-router.sh -r ssh-routes.conf -l
