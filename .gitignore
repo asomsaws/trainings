@@ -5,6 +5,8 @@ audit/
 # SSH configuration files with sensitive data
 ssh-routes.conf
 **/ssh-routes.conf
+ssh_routes.json
+**/ssh_routes.json
 
 # Backup files
 *.backup

@@ -1,0 +1,41 @@
+{
+  "description": "SSH Routes Configuration for Cyber Polygon",
+  "generated": "2025-12-03",
+  "routes": [
+    {
+      "network": "192.168.1.0/24",
+      "via": "root@kali,admin@192.168.1.10",
+      "description": "Internal Network 1 - accessible via Kali and VM1"
+    },
+    {
+      "network": "192.168.2.0/24",
+      "via": "root@kali,admin@192.168.2.10",
+      "description": "Internal Network 2 - accessible via Kali and VM2"
+    },
+    {
+      "network": "10.0.5.0/24",
+      "via": "root@kali,user@10.0.5.1",
+      "description": "Internal Network 3 - accessible via Kali and VM3"
+    },
+    {
+      "network": "172.16.0.0/16",
+      "via": "root@kali,admin@172.16.1.1,root@172.16.1.254",
+      "description": "Large internal network - multi-hop access"
+    },
+    {
+      "network": "10.10.0.0/16",
+      "via": "root@kali,admin@10.10.0.1",
+      "description": "DMZ Network"
+    },
+    {
+      "network": "192.168.100.0/24",
+      "via": "root@kali",
+      "description": "Management Network - direct through Kali"
+    },
+    {
+      "network": "default",
+      "via": "root@kali",
+      "description": "Default route for unmatched networks"
+    }
+  ]
+}
